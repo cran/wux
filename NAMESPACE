@@ -1,0 +1,51 @@
+## DESCRIPTION has to be adopted to something like
+## ##Depends: ncdf, fields, abind, corpcor, MASS, coda, mixstock, RColorBrewer
+
+## export functions to be visible for the user
+export("models2wux", "summaryWux", "read.wux.table", "AverageWuxDataFrame",
+       "CMIP5fromESGF")
+## export descriptive plots
+export("AnnualCycleplotWux", "ScatterplotWux" , "HistplotWux")
+## export reconstruct tools
+export("AnovaBarplotWux", "AnovaReconstructIterativeCC",
+       "AnovaReconstructIterative",  "AnovaReconstructLES", "WuxAnova")
+
+## register S3 methods
+#S3method("summary", "wux") ## until now just a function
+S3method("print", "summaryWux")
+
+
+## still missing:
+## corpcor, MASS, coda, mixstock, RColorBrewer
+
+## import all variables from following packages:
+#import(ncdf)
+
+## importFrom("sp", Polygons, Polygon, SpatialPolygons, over, SpatialPoints)
+## maybe import more subtle...
+## import("sp")
+
+## import only selected variables from packages (important to avoid conflicts)
+importFrom("rgeos", gArea, gIntersection) #intersecting spatial polygons and getting theri area
+importFrom("reshape", melt)
+importFrom("class", knn1)                 #nearest neighbor
+importFrom("stringr", str_trim)           #string trim
+importFrom("rgdal", readOGR)              #read shapefiles
+importFrom("Hmisc", minor.tick)
+importFrom("gdata", drop.levels, reorder.factor)
+importFrom("corpcor", pseudoinverse)
+
+## having no namspace...
+#import(ncdf)
+#importFrom(abind, abind)                #array bind
+import(ncdf)
+import(abind)
+import(fields)
+import(sp)
+
+## ??, rgdal, abind, corpcor, stringr, class, gdata, Hmisc, fields, rgeos, gdata, corpcor, MASS, coda, mixstock, RColorBrewer
+
+## some packages not necessary anymore in depends?:
+## corpcor, coda, mixstock
+## some packages not necessary anymore in imports?:
+## MASS, coda, mixstock

@@ -1,0 +1,18 @@
+Package: wux
+Type: Package
+Title: Wegener Center Climate Uncertainty Explorer
+Version: 1.2-2
+Date: 2014-10-20
+Author: Thomas Mendlik, Georg Heinrich, Andreas Gobiet and Armin Leuprecht 
+Maintainer: Thomas Mendlik <thomas.mendlik@uni-graz.at>
+Depends: sp, ncdf, reshape, abind, fields
+Imports: rgdal, rgeos, class, stringr, Hmisc, gdata, corpcor
+Suggests: lattice
+Description: Analysis of climate model output uncertainties for specified geographical regions. 
+License: GPL (>= 2)
+LazyLoad: yes
+LazyData: yes
+Packaged: 2014-11-24 08:28:33 UTC; tommaschku
+NeedsCompilation: no
+Repository: CRAN
+Date/Publication: 2014-11-24 10:36:38
