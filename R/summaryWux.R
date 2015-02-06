@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-20 16:03:12 +0100 (Thu, 20 Nov 2014) $
-# $Rev: 318 $
+# $Date: 2015-01-28 16:30:44 +0100 (Wed, 28 Jan 2015) $
+# $Rev: 324 $
 # ----------------------------------------------------------------
 
 summaryWux <- function(object, parms = c("perc.delta.precipitation_amount",
@@ -276,7 +276,7 @@ print.summaryWux <- function(x, ...){
 
 ### print overall statistics
   cat("    ----------------------------------------------------------------------\n")
-  cat("    ------------------------ OVERALL FREQUENZIES -------------------------\n")
+  cat("    ------------------------ OVERALL FREQUENCIES -------------------------\n")
   cat("    ----------------------------------------------------------------------\n")
   overall <- x$overall.stats
   cat("total number of climate models, including runs:",

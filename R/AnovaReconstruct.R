@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-20 15:33:47 +0100 (Thu, 20 Nov 2014) $
-# $Rev: 317 $
+# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
+# $Rev: 328 $
 # ----------------------------------------------------------------
 
 ##########################################################################
@@ -161,12 +161,12 @@ AnovaReconstructLES <- function(datain.df,
                                 data.name) {
 
   ## Performs a simple missing value reconstruction with two factors. The
-  ## algorithm follows Déqué et al. (2007) but the reconstruction is based
+  ## algorithm follows Deque et al. (2007) but the reconstruction is based
   ## on solving the linear equation system (LES) of the ANOVA instead of
   ## reconstructing iteratively. The main advantages of this method are that
   ## it is much faster and can be more easily extended to more factors than
   ## the original one. However, keep in mind that the results slightly differ
-  ## from the iterative procedure proposed by Déqué et al. (2007).
+  ## from the iterative procedure proposed by Deque et al. (2007).
   ##
   ## Args:
   ##   datain.df: WUX dataframe
@@ -268,7 +268,7 @@ AnovaReconstructIterative <- function(datain.df,
                                       iterations.num) {
 
   ## Performs a simple missing value reconstruction with two factors. The
-  ## algorithm follows the iterative procedure of Déqué et al. (2007).
+  ## algorithm follows the iterative procedure of Deque et al. (2007).
   ##
   ## Args:
   ##   datain.df: WUX dataframe
@@ -354,7 +354,7 @@ AnovaReconstructIterativeCC <- function(datain.df,
                                         iterations.num) {
 
   ## Performs a leave one out cross calculation (CC) of the reconstructed data
-  ## for two factors following the iterative procedure of Déqué et al. (2007).
+  ## for two factors following the iterative procedure of Deque et al. (2007).
   ##
   ## Args:
   ##   datain.df: WUX dataframe
@@ -451,7 +451,7 @@ AnovaFillValues <- function(data.matrix,
                             iterations.num) {
 
   ## Calculates the reconstructed data for two factors following
-  ## the iterative procedure of Déqué et al. (2007).
+  ## the iterative procedure of Deque et al. (2007).
   ##
   ## Args:
   ##   data.matrix: matrix of the two factors with missing values

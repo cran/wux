@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-20 11:39:10 +0100 (Thu, 20 Nov 2014) $
-# $Rev: 314 $
+# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
+# $Rev: 328 $
 # ----------------------------------------------------------------
 
 ## ----------------------------------------------------------------
@@ -387,7 +387,7 @@ ShapeFile2Polygon <- function(file.shp, dir.shp, proj = NULL, category = NULL,
 ### extract "Polygons" slot from "SpatialPolygons" object
 
   ## TODO, if categories given by user.input.... else read list element by
-  ## list element WIE FRÜHER (NA, so wie jetzt aber categorien mit rownames
+  ## list element as earlier (NA, so wie jetzt aber categorien mit rownames
   ## ersetzen)
     if (!is.null(category)) {
       categ <- shp.sp@data[[category]]

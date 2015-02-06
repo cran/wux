@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-20 14:41:49 +0100 (Thu, 20 Nov 2014) $
-# $Rev: 315 $
+# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
+# $Rev: 328 $
 # ----------------------------------------------------------------
 
 ##########################################################################
@@ -76,7 +76,7 @@ ScatterplotWux <- function(datain.df,
   ##   copyright: Boolean. If a copyright message should be plotted.
   ##              Default is FALSE.
   ##   '...': Further arguments to be passed `plot`, such as graphical
-  ##     parameters (see ´par´).
+  ##     parameters (see 'par').
   ##
   ## History:
   ##   2010-10-21 | original code (thm)
@@ -339,8 +339,8 @@ HistplotWux <- function(datain1.df,
   ##   plot.density: Boolean. TRUE if kernel density estimates should be plotted
   ##   hist1.col: Color name of the 1st histogram (e.g. "red", "blue") 
   ##   hist2.col: Color name of the 2nd histogram (e.g. "red", "blue")
-  ##   bw: The smoothing bandwidth to be used in ´density´. 
-  ##   kernel: A character string giving the smoothing kernel to be used in ´density´.
+  ##   bw: The smoothing bandwidth to be used in 'density'. 
+  ##   kernel: A character string giving the smoothing kernel to be used in 'density'.
   ##     This must be one of "gaussian", "rectangular", "triangular", "epanechnikov",
   ##     "biweight", "cosine" or "optcosine" with default "gaussian"
   ##   mark.df: Subset of WUX dataframe indicating the models to be marked
@@ -649,7 +649,7 @@ AnovaBarplotWux <- function(datain.list,
                             copyright = FALSE,
                            ...) {
 
-  ## Barplots of the ´WuxANOVA´ results displaying the relative or absolute
+  ## Barplots of the 'WuxANOVA' results displaying the relative or absolute
   ## contribution of the factors to the overall variance
   ##
   ## Args:

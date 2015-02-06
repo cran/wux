@@ -128,7 +128,7 @@ models2wux(userinput, modelinput)
     \subsection{\code{parameter.names}}{
       A character vector of parameters to be processed according to the
       NetCDF Climate and Forecast (CF) Metadata Convention
-      (\url{http://cf-pcmdi.llnl.gov/}), \cr
+      (\url{http://cfconventions.org/}), \cr
       e.g. \code{parameter.names = c("air_temperature", "precipitation_amount")}.
     }
 
