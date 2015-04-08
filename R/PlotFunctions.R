@@ -1,25 +1,25 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
-# $Rev: 328 $
+# $Date: 2015-04-07 16:09:44 +0200 (Tue, 07 Apr 2015) $
+# $Rev: 339 $
 # ----------------------------------------------------------------
 
 ##########################################################################
 ##----------------------------ScatterPlotWux----------------------------##
 ##########################################################################
 
-ScatterplotWux <- function(datain.df,
-                           var1.name,
-                           var2.name,
-                           subreg.subset = NULL,
+plot.wux.df <- function(x,
+                        var1.name = "delta.air_temperature",
+                        var2.name = "perc.delta.precipitation_amount",
+                        subreg.subset = NULL,
                            season.subset = NULL,
                            boxplots = TRUE,
                            label.only.these.models = NULL,
                            highlight.models = NULL,
                            no.text = FALSE, 
-                           vert.box.col = "coral",
-                           horiz.box.col = "cyan",
+                           vert.box.col = "cyan",
+                           horiz.box.col = "coral",
                            zero.line.col = "gray80",
                            median.line.col = "black",
                            draw.legend = TRUE,
@@ -39,9 +39,12 @@ ScatterplotWux <- function(datain.df,
   ## Draws a climate change scatterplot for two parameters of the WUX dataframe
   ##
   ## Args:
-  ##   datain.df: WUX dataframe obtained from 'Models2Wux(user.input)'
+  ##   x: WUX dataframe (wux.df object) obtained from
+  ##              'models2wux(user.input)'
   ##   var1.name: Character name of 1st parameter in the WUX dataframe
+  ##              (default is temperature change)
   ##   var2.name: Character name of 2nd parameter in the WUX dataframe
+  ##              (default is precipitation change)
   ##   season.subset: Vector of seasons to be plotted (e.g. c("MAM", "DJF"))
   ##   subreg.subset: Vector of subregions to be plotted (eg. c("ACQWA", "GAR"))
   ##   boxplots: Boolean. TRUE if marginal boxplots for the two input parameters
@@ -85,7 +88,10 @@ ScatterplotWux <- function(datain.df,
   ##   2011-10-21 | copyright added (thm)
   ##   2011-12-02 | added optional custom color palette (msu)
   ##   2014-11-20 | all subset commands changed to '[' operation (thm)
-  
+  ##   2015-04-03 | !!! changed  from function 'ScatterplotWux' to method
+  ##                plot.wux.df !!! (thm)
+
+   datain.df <- x
   ## extract specified seasons and regions
   ## default subregions
   if (is.null(subreg.subset)) { 
@@ -298,9 +304,9 @@ ScatterplotWux <- function(datain.df,
 ##-----------------------------HistPlotWux------------------------------##
 ##########################################################################
 
-HistplotWux <- function(datain1.df,
+hist.wux.df <- function(x,
                         datain2.df = NULL,
-                        var.name = NULL,
+                        var.name = "delta.air_temperature",
                         subreg.subset = NULL,
                         season.subset = NULL,
                         plot.density = TRUE,
@@ -329,7 +335,7 @@ HistplotWux <- function(datain1.df,
   ##   of the same parameter of the WUX dataframe 
   ##
   ## Args:
-  ##   datain1.df: 1st WUX dataframe
+  ##   x: 1st WUX dataframe
   ##   datain2.df: 2nd WUX dataframe. Is optionally. If indicated, the
   ##     distributions of datain1.df$var.name and datain2.df$var.name
   ##     will be compared. If not, only datain1.df$var1.name will be plotted.
@@ -366,7 +372,10 @@ HistplotWux <- function(datain1.df,
   ## History:
   ##   2011-07-15 | original code (geh)
   ##   2014-11-20 | all subset commands changed to '[' operation (thm)
+  ##   2015-04-03 | !!! changed  from function 'HistPlotWux' to method
+  ##                hist.wux.df !!! (thm)
 
+  datain1.df <- x
   ## extract specified seasons and regions
   ## default subregions
   if (is.null(subreg.subset)) { 
@@ -633,7 +642,8 @@ HistplotWux <- function(datain1.df,
 ##----------------------------AnovaBarplotWux---------------------------##
 ##########################################################################
 
-AnovaBarplotWux <- function(datain.list,
+## method corresponding to AnovaBarplotWux for simpler user interface
+plot.wux.aov <- function(x,
                             ss.relative = TRUE,
                             subreg.subset = NULL,
                             cex.names = 1.2,
@@ -653,7 +663,7 @@ AnovaBarplotWux <- function(datain.list,
   ## contribution of the factors to the overall variance
   ##
   ## Args:
-  ##   datain.list: List result obtained from `WuxANOVA`
+  ##   x: List result obtained from `aovWux`
   ##   ss.relative: Boolean. TRUE if the relative contribution should be calculated
   ##   subreg.subset: Vector of subregions to be plotted (e.g. c("ACQWA", "GAR"))
   ##   ylim: Range vector for the y-axis (e.g. c(-100, 100))
@@ -677,6 +687,8 @@ AnovaBarplotWux <- function(datain.list,
   ##   2011-10-24 | copyright statment added (thm)
   ##   2014-11-20 | all subset commands changed to '[' operation (thm)
 
+  datain.list <- x
+  
   ## extract information on subregions and seasons from list
   ## default subregions
   if (is.null(subreg.subset)) { 
@@ -828,7 +840,7 @@ AnovaBarplotWux <- function(datain.list,
 ##---------------------------AnnualCycleplotWux-------------------------##
 ##########################################################################
 
-AnnualCycleplotWux <- function(datain.df,
+plotAnnualCycle <- function(datain.df,
                                var.name = NULL,
                                subreg.subset = NULL,
                                season.subset = NULL,

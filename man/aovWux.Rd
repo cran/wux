@@ -1,8 +1,8 @@
 \encoding{UTF-8}
 
-\name{WuxAnova}
+\name{aovWux}
 
-\alias{WuxAnova}
+\alias{aovWux}
 
 \title{
 Missing value reconstruction based on ANOVA
@@ -13,7 +13,7 @@ Calculates an analysis of variance (ANOVA) based on the specified model.
 }
 
 \usage{
-WuxAnova(model.formula = formula(model.formula), datain.df)
+aovWux(model.formula = formula(model.formula), datain.df)
 }
 
 \arguments{
@@ -25,29 +25,30 @@ WuxAnova(model.formula = formula(model.formula), datain.df)
   }
 }
 
+\value{
+  Returns a object of class \code{wux.aov}, a list containing the
+  ANOVA results for each subregion and season. The names of the list
+  entries are "subreg = xx;season = yy".
+}
+
 \author{
   Georg Heinrich \email{g.heinrich@uni-graz.at}
 }
 
-\note{
-  Returns a list containing the ANOVA results for each subregion and
-  season. The names of the list entries are "subreg = xx;season = yy".
-}
-
 \examples{
 ## read WUX test data
-library(wux)
+library("wux")
 data(ensembles)
 
 wuxtest.df <- subset(ensembles, subreg == "GAR")
 
 ## data reconstruction to obtain a balanced design
-reconstruct.df <- AnovaReconstructLES(wuxtest.df,
+reconstruct.df <- reconstruct(wuxtest.df,
   factor1.name = "acronym", factor2.name = "gcm", data.name =
   "perc.delta.precipitation_amount")
 
 ## calculate ANOVA
-anova.list <- WuxAnova(perc.delta.precipitation_amount ~ acronym +
+anova.list <- aovWux(perc.delta.precipitation_amount ~ acronym +
   gcm, reconstruct.df)
 }
 

@@ -1,25 +1,25 @@
-\name{AnovaBarplotWux}
-\alias{AnovaBarplotWux}
+\name{plot.wux.aov}
+\alias{plot.wux.aov}
 
 \title{
   Barplots of the ANOVA results
 }
 
 \description{
-Barplots of the \code{\link{WuxAnova}} results displaying the relative
+Barplots of the \code{\link{aovWux}} results displaying the relative
 or absolute contribution of the individual factors to the overall variance.
 }
 
 \usage{
-AnovaBarplotWux(datain.list, ss.relative = TRUE, subreg.subset =
+\method{plot}{wux.aov}(x, ss.relative = TRUE, subreg.subset =
 NULL, cex.names = 1.2, cex.lab = 1.2, legend.text = NULL, sd.text =
 TRUE, sd.unit = "", ylim = NULL, ylab = NULL, main = NULL,
 out.file.directory = NULL, out.file.name = NULL, copyright = FALSE, ...)
 }
 
 \arguments{
-  \item{datain.list}{
-    List result obtained from \code{\link{WuxAnova}}.
+  \item{x}{
+    Object of class \code{wux.aov} obtained from the ANOVA \code{\link{aovWux}}.
   }
   
   \item{ss.relative}{
@@ -115,16 +115,16 @@ wuxtest.df$acronym <- factor(paste(wuxtest.df$institute, "_",
 wuxtest.df$rcm, sep="")) 
 
 ## reconstruction of the  missing data
-reconstructLES.df <- AnovaReconstructLES(wuxtest.df, factor1.name =
+reconstructLES.df <- reconstruct(wuxtest.df, factor1.name =
 "acronym", factor2.name = "gcm", data.name =
 "perc.delta.precipitation_amount") 
 
 ## calculate ANOVA
-anova.list <- WuxAnova(perc.delta.precipitation_amount ~ acronym +
+anova.list <- aovWux(perc.delta.precipitation_amount ~ acronym +
 gcm, reconstructLES.df)
 
 ## barplot of ANOVA results
-\dontrun{AnovaBarplotWux(anova.list, ss.relative = TRUE, las = 1,
+\dontrun{plot(anova.list, ss.relative = TRUE, las = 1,
 sd.unit = "\%", legend.text = c("RCM", "GCM", "RES"), mgp = c(2.5,1,0),
 main = "ANOVA Barplot", ylim = c(0,110))
 }

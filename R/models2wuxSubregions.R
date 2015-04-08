@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
-# $Author: thm $
-# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
-# $Rev: 328 $
+# $Author: geh $
+# $Date: 2015-03-31 14:00:14 +0200 (Tue, 31 Mar 2015) $
+# $Rev: 331 $
 # ----------------------------------------------------------------
 
 ## ----------------------------------------------------------------
@@ -233,7 +233,27 @@ GetSubregionShapes <- function(subregions,
       cat("      get offset, count and mask for subregions \"",
           subregion.name, "\" on model grid\n", sep="")
       clippings.subreg.list <- lapply(subregions.list, GetOffsetCountAndMask,
-                               dims = model.grid$dims )
+                                      dims = model.grid$dims )
+
+      ## add lon lat info to list
+      for ( ii in 1:length(clippings.subreg.list) ) {
+        clippings.subreg.list[[ii]]$lon <-
+          model.grid$lon[clippings.subreg.list[[ii]]$offset.lon.lat[1]:
+                         (clippings.subreg.list[[ii]]$offset.lon.lat[1] +
+                          clippings.subreg.list[[ii]]$count.lon.lat[1] - 1),
+                         clippings.subreg.list[[ii]]$offset.lon.lat[2]:
+                         (clippings.subreg.list[[ii]]$offset.lon.lat[2] +
+                          clippings.subreg.list[[ii]]$count.lon.lat[2] - 1)]
+
+        clippings.subreg.list[[ii]]$lat <-
+          model.grid$lat[clippings.subreg.list[[ii]]$offset.lon.lat[1]:
+                         (clippings.subreg.list[[ii]]$offset.lon.lat[1] +
+                          clippings.subreg.list[[ii]]$count.lon.lat[1] - 1),
+                         clippings.subreg.list[[ii]]$offset.lon.lat[2]:
+                         (clippings.subreg.list[[ii]]$offset.lon.lat[2] +
+                          clippings.subreg.list[[ii]]$count.lon.lat[2] - 1)]
+      }
+
       ## NAME SUBREGIONS
       ##  In case subregions already have a name, concatenate it with subregion
       ##  name, else just give single subregion name.

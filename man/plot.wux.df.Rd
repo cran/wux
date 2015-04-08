@@ -1,11 +1,10 @@
-\name{ScatterplotWux}
-\alias{ScatterplotWux}
+\name{plot.wux.df}
+\alias{plot.wux.df}
 
 \title{
-Draws a climate change scatterplot for two parameters of the WUX data frame
-}
+X - Y Scatterplot of climate change signals}
 \description{
-ScatterplotWux plots one or more scatterplots containing climate
+plot.wux.df plots one or more scatterplots containing climate
 change signals of selected meteorological parameters.
 
 This plotting routine extracts all the information from the input
@@ -13,11 +12,14 @@ data frame which has to be 'WUX-style' (see \code{\link{models2wux}}).
 }
 
 \usage{
-ScatterplotWux(datain.df, var1.name, var2.name, subreg.subset = NULL,
+\method{plot}{wux.df}(x,
+               var1.name = "delta.air_temperature",
+               var2.name = "perc.delta.precipitation_amount",
+               subreg.subset = NULL,
                season.subset = NULL, boxplots = TRUE,
                label.only.these.models = NULL, highlight.models = NULL,
                 no.text = FALSE,
-               vert.box.col = "coral", horiz.box.col = "cyan",
+               vert.box.col = "cyan", horiz.box.col = "coral",
                zero.line.col = "gray80", median.line.col = "black",
                draw.legend = TRUE, draw.seperate.legend = FALSE,
                draw.median.lines = TRUE, use.rainbow.colors = TRUE,
@@ -27,16 +29,18 @@ ScatterplotWux(datain.df, var1.name, var2.name, subreg.subset = NULL,
 }
 
 \arguments{
-  \item{datain.df}{
-    WUX data frame obtained from \code{\link{models2wux}}'.
+  \item{x}{
+    WUX data.frame (class \code{wux.df}) obtained from \code{\link{models2wux}}'.
   }
   
   \item{var1.name}{
-   Character string of 1st parameter in WUX dataset.
+   Character string of 1st parameter in WUX dataset. Default is
+   temperature change.
  }
  
   \item{var2.name}{
-    Character string of 2nd parameter in WUX dataset.
+    Character string of 2nd parameter in WUX dataset. Default is
+    precipitation change. 
   }
   
   \item{subreg.subset}{
@@ -159,7 +163,7 @@ require(wux)
 ### ENSEMBLES RCM analysis
 data(ensembles)
 
-\dontrun{ScatterplotWux(ensembles, "perc.delta.precipitation_amount",
+\dontrun{plot(ensembles, "perc.delta.precipitation_amount",
   "delta.air_temperature", boxplots = TRUE, xlim = c(-40,40),
   ylim = c(0, 4), label.only.these.models = c("ICTP-REGCM3", "MPI-M-REMO"), 
   xlab = "Precipitation Amount [\%]", ylab = "2-m Air Temperature [K]",
@@ -174,18 +178,18 @@ ensembles.gcm.names <- levels(ensembles_gcms$acronym) #8 GCM names
 
 cmip3_2050.sub <- subset(cmip3_2050, subreg \%in\% c("World", "EU.ENS")
                        & em.scn == "A1B") 
-cmip3_2050.sub <- gdata::drop.levels(cmip3_2050.sub)
+cmip3_2050.sub <- droplevels(cmip3_2050.sub)
 ensembles_gcms.sub <- subset(ensembles_gcms, !acronym \%in\%
                                 c("mpi_echam5-r3", "bccr_bcm2_0-r1",
                                   "ipsl_cm4-r2"))
-ensembles_gcms.sub <- gdata::drop.levels(ensembles_gcms.sub)
+ensembles_gcms.sub <- droplevels(ensembles_gcms.sub)
 ## combine cmip3 and ENSEMBLES GCMs in one data.frame
 gcms.combined <- rbind(ensembles_gcms.sub, cmip3_2050.sub)
 
 ## Scatterplot
 prec.range <- range(gcms.combined$perc.delta.precipitation_amount) + c(-1, 1)
 tas.range <- range(gcms.combined$delta.air_temperature)
-\dontrun{ScatterplotWux(gcms.combined,
+\dontrun{plot(gcms.combined,
                "perc.delta.precipitation_amount", "delta.air_temperature",
                subreg.subset = "EU.ENS", draw.median.lines = FALSE,
                label.only.these.models = ensembles.gcm.names,

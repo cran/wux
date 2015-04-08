@@ -31,9 +31,9 @@ ensembles <- droplevels(subset(ensembles, subreg == "EU.ENS"))
 str(ensembles)
 parms <- c("delta.air_temperature", "perc.delta.precipitation_amount",
            "delta.global_radiation", "delta.wind_speed")
-summaryWux(ensembles, parms = parms)
+summary(ensembles, parms = parms)
 
-\dontrun{ScatterplotWux(ensembles,  "perc.delta.precipitation_amount",
+\dontrun{plot(ensembles,  "perc.delta.precipitation_amount",
               "delta.air_temperature", boxplots = TRUE, xlim = c(-10,10),
               ylim = c(0, 3),
               label.only.these.models = c(""),
@@ -51,9 +51,9 @@ gcm.names <- levels(ensembles_gcms.eu$acronym)
 vars.of.interest <- !names(ensembles) \%in\% c("delta.global_radiation", "delta.wind_speed")
 ensembles <- ensembles[vars.of.interest]
 ensembles.merge <- rbind(ensembles, ensembles_gcms.eu)
-summaryWux(ensembles.merge)
+summary(ensembles.merge)
 
-\dontrun{ScatterplotWux(ensembles.merge,  "perc.delta.precipitation_amount",
+\dontrun{plot(ensembles.merge,  "perc.delta.precipitation_amount",
               "delta.air_temperature", boxplots = TRUE, xlim = c(-10,10),
               ylim = c(0, 3),
               label.only.these.models = gcm.names,

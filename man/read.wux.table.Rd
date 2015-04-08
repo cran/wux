@@ -5,7 +5,8 @@
 Reads in wux data.frame from harddisk
 }
 \description{
-Reads in wux csv file obtained from \code{\link{models2wux}} from harddisk and creates a data frame from it
+Reads in wux csv file obtained from \code{\link{models2wux}} from
+harddisk and creates a \code{wux.df} object (data frame) from it.
 }
 
 \usage{
@@ -22,6 +23,11 @@ read.wux.table(file, ...)
  }
  
 }
+
+\value{
+  A \code{wux.df} data.frame object.
+}
+
 \author{
   Thomas Mendlik \email{thomas.mendlik@uni-graz.at}
 }

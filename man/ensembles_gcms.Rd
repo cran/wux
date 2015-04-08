@@ -31,7 +31,7 @@ GCM forcing data from the ENSEMBLES project
 require(wux)
 data(ensembles_gcms)
 ensembles.gcm.names <- levels(ensembles_gcms$acronym) #8 GCM names
-summaryWux(ensembles_gcms)
+summary(ensembles_gcms)
 
 ## Now lets compare this dataset to the CMIP3 ensemble
 data(cmip3_2050)     # GCMs of CMIP3 ensemble
@@ -51,7 +51,7 @@ gcms.combined <- rbind(ensembles_gcms.sub, cmip3_2050.sub)
 ## Scatterplot
 prec.range <- range(gcms.combined$perc.delta.precipitation_amount) + c(-1, 1)
 tas.range <- range(gcms.combined$delta.air_temperature)
-\dontrun{ScatterplotWux(gcms.combined,
+\dontrun{plot(gcms.combined,
                "perc.delta.precipitation_amount", "delta.air_temperature",
                subreg.subset = "EU.ENS", draw.median.lines = FALSE,
                label.only.these.models = ensembles.gcm.names,

@@ -2,17 +2,31 @@
 ## ##Depends: ncdf, fields, abind, corpcor, MASS, coda, mixstock, RColorBrewer
 
 ## export functions to be visible for the user
-export("models2wux", "summaryWux", "read.wux.table", "AverageWuxDataFrame",
-       "CMIP5fromESGF")
+export("models2wux"## , "summaryWux"
+       , "read.wux.table", "AverageWuxDataFrame",
+       "CMIP5fromESGF", "CMIP5toModelinput")
+## also export functions of corresponding S3 methods...
+export("summary.wux.df", "plot.wux.df", "hist.wux.df")
 ## export descriptive plots
-export("AnnualCycleplotWux", "ScatterplotWux" , "HistplotWux")
+export("plotAnnualCycle"## , "ScatterplotWux"
+       ## , "HistplotWux"
+       )
 ## export reconstruct tools
-export("AnovaBarplotWux", "AnovaReconstructIterativeCC",
-       "AnovaReconstructIterative",  "AnovaReconstructLES", "WuxAnova")
+export("reconstruct")
+export("aovWux")
+export("plot.wux.aov")
+## export(## "AnovaBarplotWux",
+##        "AnovaReconstructIterativeCC",
+##        "AnovaReconstructIterative",  "AnovaReconstructLES"## , "WuxAnova"
+##        )
 
 ## register S3 methods
 #S3method("summary", "wux") ## until now just a function
-S3method("print", "summaryWux")
+S3method("summary", wux.df)
+S3method("plot", wux.df)
+S3method("plot", wux.aov)
+S3method("hist", wux.df)
+S3method("print", summaryWuxdf)
 
 
 ## still missing:
@@ -34,6 +48,7 @@ importFrom("rgdal", readOGR)              #read shapefiles
 importFrom("Hmisc", minor.tick)
 importFrom("gdata", drop.levels, reorder.factor)
 importFrom("corpcor", pseudoinverse)
+importFrom("rworldmap", getMap)
 
 ## having no namspace...
 #import(ncdf)

@@ -146,7 +146,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"d:v:p:m:",[])
     except getopt.GetoptError:
-        print 'bla CMIP5_downloader -d <filedirectory> -v <variable> -p <pathway> -m <models>'
+        print 'syntax: CMIP5_downloader -d <filedirectory> -v <variable> -p <pathway> -m <models>'
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':

@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2015-02-06 14:37:51 +0100 (Fri, 06 Feb 2015) $
-# $Rev: 328 $
+# $Date: 2015-04-08 10:47:41 +0200 (Wed, 08 Apr 2015) $
+# $Rev: 342 $
 # ----------------------------------------------------------------
 
 ##########################################################################
@@ -150,6 +150,30 @@ ExpandWuxDataFrame <- function(datain.df,
 }
 ##########################################################################
 
+
+##########################################################################
+##--------------------------reconstruct methos -------------------------##
+##########################################################################
+
+reconstruct <- function(x, factor1.name, factor2.name, data.name,
+                        method = "LES", iterations.num = 100){
+  ## method: LES, Iterative, IterativeCC
+  if (method == "LES") {
+    rwux.df <- AnovaReconstructLES(x, factor1.name, factor2.name, data.name)
+  } else if (method == "Iterative") {
+    rwux.df <- AnovaReconstructIterative(x, factor1.name, factor2.name,
+                                         data.name, iterations.num = 100)
+  } else if (method == "IterativeCC") {
+    rwux.df <- AnovaReconstructIterativeCC(x, factor1.name, factor2.name,
+                                           data.name, iterations.num = 100)
+  }  else {
+    stop("UNKNOWN METHOD for \"reconstruct\"")
+  }
+
+  class(rwux.df) <- append("wux.df", class(rwux.df))
+  class(rwux.df) <- append("rwux.df", class(rwux.df))
+  return(rwux.df)
+}
 
 ##########################################################################
 ##--------------------------AnovaReconstructLES-------------------------##
@@ -489,8 +513,7 @@ AnovaFillValues <- function(data.matrix,
 ##########################################################################
 ##------------------------------WuxAnova--------------------------------##
 ##########################################################################
-
-WuxAnova <- function(model.formula = formula(model.formula),
+aovWux <- function(model.formula = formula(model.formula),
                      datain.df) {
 
   ## Calculates an analysis of variance (ANOVA) based on the
@@ -545,6 +568,7 @@ WuxAnova <- function(model.formula = formula(model.formula),
     }
   }
 
+  class(dataout.list) <- append("wux.aov", class(dataout.list))
   return(dataout.list)
 
 }

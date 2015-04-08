@@ -1,12 +1,12 @@
-\name{AnnualCycleplotWux}
-\alias{AnnualCycleplotWux}
+\name{plotAnnualCycle}
+\alias{plotAnnualCycle}
 
 \title{
   Plots the annual cycle
 }
 
 \description{
-AnnualCycleplotWux plots the monthly or seasonal annual cycle of
+plotAnnualCycle plots the monthly or seasonal annual cycle of
 indicated models and the box-whisker plots of the underlying distribution.
 
 This plotting routine extracts all the information from the input
@@ -14,7 +14,7 @@ data frame which has to be 'WUX-style' (see \code{\link{models2wux}}).
 }
 
 \usage{
-AnnualCycleplotWux(datain.df, var.name = NULL, subreg.subset = NULL,
+plotAnnualCycle(datain.df, var.name = NULL, subreg.subset = NULL,
 season.subset = NULL, plot.quantiles = NULL, quantile.method = 7,
 mark.df = NULL, plot.legend = FALSE, cex.names = 1.2, cex.lab = 1.2,
 ylab = NULL, main = NULL, out.file.directory = NULL, out.file.name =
@@ -120,7 +120,7 @@ wuxtest.df <- subset(ensembles, subreg == "GAR")
 mark.df <- subset(wuxtest.df, acronym \%in\% c("ICTP-REGCM3", "MPI-M-REMO"))
 mark.df2 <- gdata::drop.levels(mark.df)
 
-\dontrun{AnnualCycleplotWux(wuxtest.df, "perc.delta.precipitation_amount", mark.df =
+\dontrun{plotAnnualCycle(wuxtest.df, "perc.delta.precipitation_amount", mark.df =
 mark.df, plot.legend = TRUE, boxfill = "light yellow", notch =
 FALSE,  boxwex = 0.5, ylim = c(-60,60), plot.quantiles =
 c(0.02,0.25,0.5,0.75,0.98), boxcol = "red", ylab = "Precipitation

@@ -1,12 +1,12 @@
-\name{HistplotWux}
-\alias{HistplotWux}
+\name{hist}
+\alias{hist.wux.df}
 
 \title{
 Plots histograms and kernel density estimates 
 }
 
 \description{
-HistplotWux plots either one or two histograms and the according kernel
+\code{hist} plots either one or two histograms and the according kernel
 density estimates using \code{density}.
 
 This plotting routine extracts all the information from the input
@@ -14,7 +14,7 @@ dataframe which has to be 'WUX-style' (see \code{\link{models2wux}}).
 }
 
 \usage{
-HistplotWux(datain1.df, datain2.df = NULL, var.name = NULL,
+\method{hist}{wux.df}(x, datain2.df = NULL, var.name = "delta.air_temperature",
 subreg.subset = NULL, season.subset = NULL, plot.density = TRUE,
 %% plot.lmm.density = FALSE, 
 hist1.col = "red", hist2.col = "blue", bw = "nrd0", kernel = "gaussian",
@@ -25,7 +25,7 @@ NULL, out.file.directory = NULL, out.file.name = NULL, copyright = FALSE, ...)
 }
 
 \arguments{
-  \item{datain1.df}{
+  \item{x}{
     1st WUX dataframe obtained from \code{\link{models2wux}}.
   }
 
@@ -34,7 +34,7 @@ NULL, out.file.directory = NULL, out.file.name = NULL, copyright = FALSE, ...)
   }
   
   \item{var.name}{
-   Character string of parameter in WUX dataset.
+   Character string of parameter in WUX dataset. Default is temperature change.
  }
   
   \item{subreg.subset}{
@@ -174,7 +174,7 @@ mark.df <- subset(wuxtest.df, acronym \%in\% c("ICTP-REGCM3", "MPI-M-REMO"))
 mark.df <- droplevels(mark.df)
 
 ## histogram plot
-\dontrun{HistplotWux(datain1.df = wuxtest.df, var.name =
+\dontrun{hist(x = wuxtest.df, var.name =
   "perc.delta.precipitation_amount", xlim = c(-50,50), ylim = c(0,0.12),
   xtick.number = 9, xminor.tick = TRUE,  ytick.number = 5,
   yminor.tick = TRUE, xlab = "Precipitation Amount [\%]", main =

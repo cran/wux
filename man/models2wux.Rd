@@ -35,24 +35,13 @@ models2wux(userinput, modelinput)
     This is either a file name containing a list which will be sourced
     internally, or a list object.
   }
-  
   \item{modelinput}{
     The specifications of file paths, file names and meta-information of
     every single climate simulation output you have stored on your HDD.
     This is either a file name containing a list which will be sourced
     internally, or a list object.
   }
-  
-    % \item{does.plot.subregions}{
-    % Boolean. If TRUE, interactive plots will be
-    % displayed showing (I) The Shapes of the
-    % subregion files (shapefiles, rectangle, ...)
-    % (II) a rough pixel map with the clipped areal
-    % data of the NetCDF file. This keyword is for
-    % debugging purposes, ideally to check whether
-    % newly added models in the config file \code{InitModelDictionary.R} are
-    % read in correctly. Default is no display.
-  }
+}
 
 \details{
   To process a climate multimodel ensemble of your choice, \code{models2wux}
@@ -90,6 +79,8 @@ models2wux(userinput, modelinput)
     subregion coverage. \cr
     \code{spatial.weighting} \tab Cosine areal weighting of regular grid. \cr
     \code{na.rm} \tab Behavior for missing values of timeslices. \cr
+    \code{plot.subregions} \tab Specifies diagnostic plotting of grid points
+    within the subregions. \cr
     \code{save.as.data} \tab Specification of output directory and
     filename. \cr
     \code{climate.models} \tab Specification of climate models to be 
@@ -306,13 +297,45 @@ models2wux(userinput, modelinput)
       and the user does not know anything about it. Reason for these artifacts might be short time series
       (e.g. some models project only until 2035, so an analysis unitl 2050
       would be biased) or simply missing values due to corrupt or missing
-      NetCDF files. 
-      
+      NetCDF files.
+
       If \code{na.rm = TRUE} is set in the user input, missing values are
       filled with NA, but the temporal statistics are calculated using the \code{na.rm = TRUE}
       flag. \code{na.rm = FALSE} keeps the NA values
       and thus leads to NA statistics.}
-
+    \subsection{\code{plot.subregions}}{
+      A list containing information about diagnostic plotting of grid
+      points within the subregions. \code{png} plots are generated
+      showing the grid points within a subregion. The size of the drawn
+      circles correspond to the weighting factor of \code{area.fraction}.
+      The list contains three elements: \code{save.subregion.plots},
+      \code{xlim}, and \code{ylim}.
+      \describe{
+    	\item{save.subregion.plots:}{
+    	  A character containing only the output path as the filenames
+    	  are automatically generated via the model and subregion names.
+    	  For example \code{save.subregion.plots = "/tmp/"}  will
+    	  save the plots in the directory \code{/tmp/}.
+    	  If \code{save.subregion.plots} is not specified no plots will
+    	  be drawn!
+    	}
+    	\item{xlim:}{
+    	  A vector containing the longitudional boundaries of the
+    	  plots. For example \code{xlim=c(10,50)} draws the plot from
+    	  10 to 50 degrees East. If \code{xlim} is not specified the boundaries
+    	  will be automatically generated.
+    	}
+    	\item{ylim:}{
+    	  A vector containing the longitudional boundaries of the
+    	  plots. For example \code{xlim=c(10,50)} draws the plot from
+    	  10 to 50 degrees North. If \code{ylim} is not specified the boundaries
+    	  will be automatically generated.
+    	}
+  	\item{cex:}{
+    	 Factor for pointsize relative to the default.
+    	}
+       }
+    }
     \subsection{\code{save.as.data}}{
       A character containing both the output path and
       filename. For example \code{save.as.data = "/tmp/cmip3"}  will
@@ -465,7 +488,7 @@ models2wux(userinput, modelinput)
 
 
 \value{
-  A \code{data.frame} containing climate change signals for all models,
+  A \code{data.frame} of class \code{c("wux.df", "data.frame")} containing climate change signals for all models,
   subregions, and parameters specified in \code{userinput}. It also
   writes a csv file on your HDD.
 }
@@ -490,7 +513,7 @@ models2wux(userinput, modelinput)
 ## an R data.frame for further analysis. 
 
 ## I) Load wux functions and example datasets...
-library(wux)
+library("wux")
 
 ## II) You need to obtain the climate simulations first. You can get
 ## started with downloading some example CMIP5 NetCDF files from the
@@ -512,7 +535,12 @@ library(wux)
 ## be saved as ONE file somewhere on your computer. We call this
 ## information "modelinput". You should share this 
 ## file with you collegues using the same IT infrastructure to share
-## synergies. One example file would be the following:
+## synergies. You can create such a file based on the data downloade
+## by "CMIP5fromESGF":
+\dontrun{CMIP5toModelinput(filedir = "~/tmp/CMIP5",
+                  save.to = "~/modelinput.R")
+}
+## This file then would look this:
 data(modelinput_test)
 
 ## It specifies temperature and precipitation files for the two
@@ -567,7 +595,7 @@ CMIP5_example_changesignal
 
 ## VI) Finally you can make all kind of analysis you are interested in,
 ## using either functions from wux or from any other R funtionality
-summaryWux(CMIP5_example_changesignal, parms = "delta.air_temperature")
+summary(CMIP5_example_changesignal, parms = "delta.air_temperature")
 
 ## or plot timeseries as
 require(lattice)

@@ -10,7 +10,7 @@ This example \code{userinput_CMIP5_changesignal} can be used to test the
 configurations used to read and process climate model data. In general,
 you should store it as an own file somewhere on your system. It
 calculates a time series of the historical run 1971-2005 and RCP 8.5 2006-2100 for
-temperature over the Alpine region of 2 CMIP5 models "NorESM1-M" and
+temperature over the Alpine region of 2 CMIP5 models "MIROC5" and
 "CanESM2". It aggregates the monthly NetCDF model output to boreal
 seasons, winter, spirng, summer and autumn. It also stores the output as
 a csv-file in your "/tmp" directory.

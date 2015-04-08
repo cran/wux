@@ -30,9 +30,9 @@ require(wux)
 data(cmip3_2100)
 
 str(cmip3_2100)
-summaryWux(cmip3_2100)
+summary(cmip3_2100)
 
-\dontrun{ScatterplotWux(cmip3_2100,  "perc.delta.precipitation_amount",
+\dontrun{plot(cmip3_2100,  "perc.delta.precipitation_amount",
               "delta.air_temperature",  subreg.subset = "CORDEX.Africa",
               boxplots = TRUE, xlim = c(-20,20), label.only.these.models = "",
               ylim = c(0,5), xlab = "Precipitation Amount [\%]",

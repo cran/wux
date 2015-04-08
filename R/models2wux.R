@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-21 10:49:55 +0100 (Fri, 21 Nov 2014) $
-# $Rev: 321 $
+# $Date: 2015-04-03 12:24:30 +0200 (Fri, 03 Apr 2015) $
+# $Rev: 338 $
 # ----------------------------------------------------------------
 
 ## ----------------------------------------------------------------
@@ -14,7 +14,8 @@
 ## ----------------------------------------------------------------
 
 
-models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = FALSE
+models2wux <- function(userinput,
+                       modelinput = NULL
                        ) {
   ## Creates a dataframe containing climate change signals of climate models
   ## listed in user.input.
@@ -25,11 +26,6 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
   ##                   general.input section with tuning parameters and
   ##                   a model.input section listing the climate models
   ##                   to be processed.
-  ##   does.plot.subregions: Boolean. If TRUE, interactive plots will be
-  ##                            displayed showing (I) The Shapes of the
-  ##                            subregion files (shapefiles, rectangle, ...)
-  ##                            (II) a rough pixel map with the cliped areal
-  ##                            data of the NetCDF file.
   ##   modelinput: filepath to model.input file. default is NULL,
   ##                which reads in the internal IniModelsDictionary file.
   ##
@@ -46,14 +42,14 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
   ##   2011-02-11 | user.input handling changes, renaming from 'Modes2Wux'
   ##                to 'models2wux'
   ##   2011-04-29 | structural changes for generating WUX dataframe
-  ##   2011-09-14 | added does.display.subregions keyword to models2wux function
+  ##   2011-09-14 | added display.subregions keyword to models2wux function
   ##   2011-09-22 | added case filenames = NA (thus not reading in any data)
   ##              | plus: return value added (it got lost somewhere...)
   ##   2014-11-12 | alternative model.input pathway introduced (thm)
   ##   2014-11-14 | rename argument "input" to "userinput" (thm)
   ##   2014-11-19 | now omitting argument does.plot.subregions (thm)
   ##   2014-11-21 | platform independent (thm)
-
+  ##   2015-03-31 | new handling of subregion plotting
 
   cat("\n")
 
@@ -71,10 +67,19 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
 
 ############## EXTRACTING INFORMATION FROM user.input FILE ##############
 
+  ## create outdir for data if path not existing
   save.as.data <- user.input$save.as.data
-  ## create outdir if path not existing
-  if (!file.exists(dirname(save.as.data)))
+  if ( !file.exists(dirname(save.as.data)) )
     dir.create(dirname(save.as.data), recursive = TRUE)
+
+  ## create outdir for plots if path not existing
+  if ( !is.null(user.input$plot.subregions$save.subregions.plots) ) {
+    save.subregions.plots <- user.input$plot.subregions$save.subregions.plots
+    if ( !file.exists(save.subregions.plots) )
+      dir.create(save.subregions.plots, recursive = TRUE)
+  } else {
+    save.subregions.plots <- NULL
+  }
 
   ## user input for area fraction
   if ( !is.null(user.input$area.fraction) ) {
@@ -109,7 +114,7 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
   } else {
     na.rm <- FALSE
   }
-  
+
   ## subregion specification
   subregions <- user.input$subregions
 
@@ -245,7 +250,7 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
           data.aggr.list <-
           GetAggregatedSpatioTemporalData(filenames,
                                           model.name = modelname.counter,
-                                          save.as.data = save.as.data,
+                                          plot.subregion = user.input$plot.subregion,
                                           grid.filenames = grid.filename,
                                           subregions = subregions,
                                           parameter.name = parameter.shortname,
@@ -349,8 +354,10 @@ models2wux <- function(userinput, modelinput = NULL## ,  does.plot.subregions = 
   cat("**\n")
 
   if (!is.time.series) {
+    class(wux.df) <- append("wux.df", class(wux.df))
     return(wux.diff.df)
   } else {
+    class(wux.df) <- append("wux.ts.df", class(wux.df))
     return(wux.df)
   }
 
@@ -379,7 +386,6 @@ ReadFromModelDictionary <- function(modelnames, modelinput = NULL){
   ##   2014-11-12 | alternative model.input possible (thm)
 
   ## check wheteher user specified a specific model input (NULL means no)
-  cat(is.null(modelinput))
   if (is.null(modelinput)){
     ## read in whole InitModelDictionary model.list
     model.input <- InitModelDictionary()

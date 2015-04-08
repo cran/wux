@@ -1,13 +1,13 @@
 
 ## ----------------------------------------------------------------
-## $Author: thm $
-## $Date: 2014-11-20 11:39:10 +0100 (Thu, 20 Nov 2014) $
-## $Rev: 314 $
+## $Author: geh $
+## $Date: 2015-03-31 14:00:14 +0200 (Tue, 31 Mar 2015) $
+## $Rev: 331 $
 ## ----------------------------------------------------------------
 
 
 GetAggregatedSpatioTemporalData <- function(filenames, model.name = NULL,
-                                            save.as.data = NULL,
+                                            plot.subregion,
                                             grid.filenames = NULL,
                                             subregions = NULL, parameter.name,
                                             use.land.mask, land.mask,
@@ -40,7 +40,7 @@ GetAggregatedSpatioTemporalData <- function(filenames, model.name = NULL,
     ## no interpolation
     aggr.data.list <-
       GetAggregatedSpatioTemporalData.nointerpol(filenames,  model.name,
-                                                 save.as.data,
+                                                 plot.subregion,
                                                  grid.filenames, subregions,
                                                  parameter.name, use.land.mask,
                                                  land.mask, land.mask.name,
@@ -50,7 +50,7 @@ GetAggregatedSpatioTemporalData <- function(filenames, model.name = NULL,
     ## no interpolation
     aggr.data.list <-
       GetAggregatedSpatioTemporalData.interpol(filenames,  model.name,
-                                               save.as.data,
+                                               plot.subregion,
                                                grid.filenames, subregions,
                                                parameter.name,
                                                interpolate.to.grid = FALSE,
@@ -65,7 +65,7 @@ GetAggregatedSpatioTemporalData <- function(filenames, model.name = NULL,
 
 GetAggregatedSpatioTemporalData.nointerpol <- function(filenames,
                                                        model.name = NULL,
-                                                       save.as.data = NULL,
+                                                       plot.subregion,
                                                        grid.filenames = NULL,
                                                        subregions = NULL,
                                                        parameter.name,
@@ -75,7 +75,6 @@ GetAggregatedSpatioTemporalData.nointerpol <- function(filenames,
                                                        temporal.aggr,
                                                        startdate,
                                                        enddate,
-                                                       ## does.plot.subregions,
                                                        lonlat.var.name,
                                                        what.timesteps,
                                                        ...) {
@@ -91,8 +90,8 @@ GetAggregatedSpatioTemporalData.nointerpol <- function(filenames,
   ##   first.aggr: List of first statistic options from user.input.
   ##   second.aggr:  List of second statistic options from user.input.
   ##   does.plot.subregions: Boolean. If TRUE, interactive plots will be
-  ##                      displayed showing a rough pixel map with the clipped
-  ##                      areal data of the NetCDF file.
+  ##                         displayed showing a rough pixel map with the clipped
+  ##                         areal data of the NetCDF file.
   ##   '...': Keywords for ReadNetCdfTimeData, ReadNetCdf and
   ##          AggregateFirstStatistic
   ##
@@ -201,11 +200,12 @@ GetAggregatedSpatioTemporalData.nointerpol <- function(filenames,
     data.list <- AggregateTemporal(data.array, temporal.aggr, nc.time,
                                    startdate, enddate, what.timesteps, ...)
 
-    ## do diagnostic plotting of the area for some season (not important,
-    ## only the shape counts)
-    ## if ( does.plot.subregions & !all(is.na(filenames)) ) {
-    ##   plotit(model.name, sub.name, single.sub.data.clip, data.list, save.as.data)
-    ## }
+    ## do diagnostic plotting of the grid points in a certain area
+    if ( !is.null(plot.subregion$save.subregions.plots) &
+        !all(is.na(filenames)) ) {
+      plotit(model.name, sub.name, single.sub.data.clip,
+             data.list, plot.subregion)
+    }
 
     cat("     array size after temporal aggregation: ",
         object.size(data.list) / 1024 / 1024 , " MB", "\n", sep="")

@@ -32,11 +32,11 @@ require(wux)
 data(cmip5_2050)
 
 str(cmip5_2050)
-summaryWux(cmip5_2050)
+summary(cmip5_2050)
 
 tas.range <- c(0, 2.5)
 pr.range <- c(-10, 15)
-\dontrun{ScatterplotWux(cmip5_2050, "delta.air_temperature",
+\dontrun{plot(cmip5_2050, "delta.air_temperature",
               "perc.delta.precipitation_amount", boxplots = TRUE,
               ylim = pr.range, xlim = tas.range, ylab = "Precipitation Amount [%]",
               xlab = "2-m Air Temperature [K]", draw.legend = TRUE,

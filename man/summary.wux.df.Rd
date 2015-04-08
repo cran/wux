@@ -1,20 +1,22 @@
-\name{summaryWux}
-\alias{summaryWux}
+\name{summary}
+\alias{summary.wux.df}
 
 \title{
 Summary of a WUX data.frame
 }
 \description{
-Prints a screen summary of a WUX \code{data.frame}. 
+Prints a screen summary of a WUX \code{data.frame} (class \code{wux.df}). 
 }
 \usage{
-summaryWux(object, parms = c("perc.delta.precipitation_amount",
-"delta.air_temperature"), average.over.gcm.runs = FALSE, ...)
+\method{summary}{wux.df}(object, parms = c("perc.delta.precipitation_amount",
+"delta.air_temperature"), average.over.gcm.runs = FALSE, \dots)
+%% summary.wux.df(object, parms = c("perc.delta.precipitation_amount",
+%% "delta.air_temperature"), average.over.gcm.runs = FALSE, ...)
 }
 
 \arguments{
   \item{object}{
-    WUX \code{data.frame} obtained from \code{\link{models2wux}}'
+    WUX \code{data.frame} (\code{wux.df} object) obtained from \code{\link{models2wux}}
   }
 
   \item{parms}{
@@ -35,7 +37,7 @@ summaryWux(object, parms = c("perc.delta.precipitation_amount",
   }
 }
 \value{
-  Returns a \code{summaryWux} object, which is a list, but will be
+  Returns a \code{summaryWuxdf} object, which is a list, but will be
   printed in a special way.
   The list has two elements, namely \code{overall.stats} and
   \code{parms.stats}. Both are lists again. \code{overall.stats} stores
@@ -47,11 +49,11 @@ summaryWux(object, parms = c("perc.delta.precipitation_amount",
 }
 
 \details{
-  \code{summaryWux} gives an overview of model frequenzy and calculates
+  \code{summary.wux.df} gives an overview of model frequenzy and calculates
   statistics for each meteorological parameter within each season in
   each subregion for all emission scenarios.
   
-  \code{print.summaryWux} prints the result to the screen.
+  \code{print.summaryWuxdf} prints the result to the screen.
 }
 \author{
   Thomas Mendlik \email{thomas.mendlik@uni-graz.at}
@@ -60,16 +62,16 @@ summaryWux(object, parms = c("perc.delta.precipitation_amount",
 \examples{
 ## ENSEMBLES data summary
 data(ensembles)
-summaryWux(ensembles)
+summary(ensembles)
 
 ## CMIP3 data summary
 data(cmip3_2100)
-summaryWux(cmip3_2100, average.over.gcm.runs = TRUE) # Average GCMs with different 
+summary(cmip3_2100, average.over.gcm.runs = TRUE) # Average GCMs with different 
                                                       # initial conditions
                                                       
-## structure of summaryWux list
+## structure of summaryWuxdf object
 data(ensembles_gcms)
-ensembles.gcms.summary <- summaryWux(ensembles_gcms)
+ensembles.gcms.summary <- summary(ensembles_gcms)
 ensembles.gcms.summary  # summary of 8 GCMs
 str(ensembles.gcms.summary)
 }

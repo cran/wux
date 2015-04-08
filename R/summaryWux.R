@@ -1,14 +1,15 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2015-01-28 16:30:44 +0100 (Wed, 28 Jan 2015) $
-# $Rev: 324 $
+# $Date: 2015-04-07 16:09:44 +0200 (Tue, 07 Apr 2015) $
+# $Rev: 339 $
 # ----------------------------------------------------------------
 
-summaryWux <- function(object, parms = c("perc.delta.precipitation_amount",
-                             "delta.air_temperature"), average.over.gcm.runs = FALSE, ...){
-  ## Summary method for WUX data.frame (of class "wux"). Will be printed
-  ## with method "print.summaryWux".
+summary.wux.df <- function(object, parms = c("perc.delta.precipitation_amount",
+                             "delta.air_temperature"),
+                           average.over.gcm.runs = FALSE, ...){
+  ## Summary method for WUX data.frame (of class "wux.df"). Will be printed
+  ## with method "print.summaryWuxdf".
   ##
   ## Args:
   ##   object: WUX data.frame obtained from models2wux()
@@ -54,7 +55,8 @@ summaryWux <- function(object, parms = c("perc.delta.precipitation_amount",
   ##                to be a S3 method so far... we will introduce wux objects later (thm)
   ##
   ## TODO: possibility to average over RCM runs (should be easy to implement)
-  
+
+
   ## extract some vectors from data.frame
   sea <- object$season
   em.scen <- object$em.scn
@@ -253,14 +255,14 @@ summaryWux <- function(object, parms = c("perc.delta.precipitation_amount",
 
   
 ###  returns olist.metric
-  ## assign object to class "summaryWux"
-  class(output.list) <- c("summaryWux", "list")
+  ## assign object to class "summaryWuxdf"
+  class(output.list) <- c("summaryWuxdf", "list")
   return(output.list)
 }
 
 
 
-print.summaryWux <- function(x, ...){
+print.summaryWuxdf <- function(x, ...){
   ## Prints (via "cat") an "summaryWux" object in a nice way
   ##
   ## Args:

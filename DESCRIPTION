@@ -1,8 +1,8 @@
 Package: wux
 Type: Package
 Title: Wegener Center Climate Uncertainty Explorer
-Version: 1.2-3
-Date: 2015-01-28
+Version: 2.0-0
+Date: 2015-04-02
 Authors@R: c(person("Thomas", "Mendlik", role = c("aut", "cre"),
 	             email = "thomas.mendlik@uni-graz.at"),
              person("Georg", "Heinrich", role = c("aut"),
@@ -14,13 +14,13 @@ Authors@R: c(person("Thomas", "Mendlik", role = c("aut", "cre"),
 Author: Thomas Mendlik [aut, cre], Georg Heinrich [aut], Armin Leuprecht [aut], Andreas Gobiet [ths]
 Maintainer: Thomas Mendlik <thomas.mendlik@uni-graz.at>
 Depends: sp, ncdf, reshape, abind, fields
-Imports: rgdal, rgeos, class, stringr, Hmisc, gdata, corpcor
+Imports: rgdal, rgeos, class, stringr, Hmisc, gdata, corpcor, rworldmap
 Suggests: lattice
-Description: Methods to calculate and interpret climate change signals and time series from climate multi-model ensembles. Climate model output in binary NetCDF format is read in and aggregated over a specified region to a data.frame for statistical analysis. Global circulation models (GCMs), as the CMIP5 or CMIP3 simulations, can be read in the same way as Regional Climate Models (RCMs), as e.g. the CORDEX or ENSEMBLES simulations. 
+Description: Methods to calculate and interpret climate change signals and time series from climate multi-model ensembles. Climate model output in binary 'NetCDF' format is read in and aggregated over a specified region to a data.frame for statistical analysis. Global Circulation Models, as the 'CMIP5' simulations, can be read in the same way as Regional Climate Models, as e.g. the 'CORDEX' or 'ENSEMBLES' simulations. The package has been developed at the 'Wegener Center for Climate and Global Change' at the University of Graz, Austria.
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-Packaged: 2015-02-06 15:28:08 UTC; tommaschku
+Packaged: 2015-04-08 09:14:26 UTC; tommaschku
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2015-02-06 17:01:03
+Date/Publication: 2015-04-08 12:19:01
