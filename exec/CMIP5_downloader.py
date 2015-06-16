@@ -7,8 +7,6 @@
 # folders.
 
 # TODO: - if bash is invalid, omit it!
-#       - download individual models
-#       - download individual parameters
 
 from xml.dom import minidom
 import urllib
@@ -153,7 +151,7 @@ def main(argv):
             print 'CMIP5_downloader -d <filedirectory> -v <variable> -p <pathway> -m <models>'
             sys.exit()
         elif opt in ("-d"):
-            filedirectory = arg
+            filedirectory = os.path.expanduser(arg)
         elif opt in ("-v"):
             variable = arg
         elif opt in ("-p"):

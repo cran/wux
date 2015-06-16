@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
 # $Author: thm $
-# $Date: 2014-11-07 11:14:02 +0100 (Fri, 07 Nov 2014) $
-# $Rev: 297 $
+# $Date: 2015-06-02 10:29:56 +0200 (Tue, 02 Jun 2015) $
+# $Rev: 343 $
 # ----------------------------------------------------------------
 
 InitModelDictionary <- function() {
@@ -21328,6 +21328,276 @@ gridfile.path = "/data/reloclim/rcm/ENSEMBLES/SMHI/RCA/HadCM3Q3_A1B/postproc/QM_
       ),
 ###########################################################################
 
+###########################################################################
+    'KNMI-RACMO2_MIROC' = list(
+      institute = "KNMI",
+      rcm = "RACMO",
+      gcm = "MIROC3-2",
+      gcm.run = 1,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim-tmp/rcm/ENSEMBLES_from_KNMI",
+      file.name = list(
+        air_temperature = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_25km_[0-9]{4}-[0-9]{4}_ts.nc'
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim-tmp/rcm/ENSEMBLES_from_KNMI/KNMI-RACMO2_A1B_MIROC3.2-hires_FIX_25km_sftls.nc",
+      gridfile.path = "/data/reloclim-tmp/rcm/ENSEMBLES_from_KNMI",
+      gridfile.filename = "KNMI-RACMO2_A1B_MIROC3.2-hires_FIX_25km_orog.nc",
+      resolution = "25km"
+      ),
+
+      
+###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+###+++++++++++++++++++++++DATASET: ENSEMBLES 50km+++++++++++++++++++++++++++
+###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+###########################################################################
+    'KNMI-RACMO2_ECHAM5-r1_50km' = list(
+      institute = "KNMI",
+      rcm = "RACMO2",
+      gcm = "ECHAM5/MPI-OM",
+      gcm.run = 1,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r1",
+      file.name = list(
+        air_temperature = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r1_DM_50km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          NA
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r1/KNMI-RACMO2_A1B_ECHAM5-r1_FIX_50km_sftls.nc",
+      gridfile.path = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r1",
+      gridfile.filename = "KNMI-RACMO2_A1B_ECHAM5-r1_FIX_50km_orog.nc",
+      resolution = "50km"
+      ),
+###########################################################################
+    'KNMI-RACMO2_ECHAM5-r2_50km' = list(
+      institute = "KNMI",
+      rcm = "RACMO2",
+      gcm = "ECHAM5/MPI-OM",
+      gcm.run = 2,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r2",
+      file.name = list(
+        air_temperature = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r2_DM_50km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          NA
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r2/KNMI-RACMO2_A1B_ECHAM5-r2_FIX_50km_sftls.nc",
+      gridfile.path = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r2",
+      gridfile.filename = "KNMI-RACMO2_A1B_ECHAM5-r2_FIX_50km_orog.nc",
+      resolution = "50km"
+      ),
+###########################################################################
+    'KNMI-RACMO2_ECHAM5-r3_50km' = list(
+      institute = "KNMI",
+      rcm = "RACMO2",
+      gcm = "ECHAM5/MPI-OM",
+      gcm.run = 3,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r3",
+      file.name = list(
+        air_temperature = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'KNMI-RACMO2_A1B_ECHAM5-r3_DM_50km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          NA
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r3/KNMI-RACMO2_A1B_ECHAM5-r3_FIX_50km_sftls.nc",
+      gridfile.path = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_ECHAM5-r3",
+      gridfile.filename = "KNMI-RACMO2_A1B_ECHAM5-r3_FIX_50km_orog.nc",
+      resolution = "50km"
+      ),
+
+###########################################################################
+    'KNMI-RACMO22_MIROC3-1_50km' = list(
+      institute = "KNMI",
+      rcm = "RACMO22",
+      gcm = "MIROC3.1",
+      gcm.run = 1,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_MIROC",
+      file.name = list(
+        air_temperature = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'KNMI-RACMO2_A1B_MIROC3.2-hires_DM_50km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          NA
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_MIROC/KNMI-RACMO2_A1B_MIROC3.2-hires_FIX_50km_sftls.nc",
+      gridfile.path = "/data/reloclim/rcm/ENSEMBLES_50km/KNMI_MIROC",
+      gridfile.filename = "KNMI-RACMO2_A1B_MIROC3.2-hires_FIX_50km_orog.nc",
+      resolution = "50km"
+      ),
+
+###########################################################################
+    'SMHIRCA_ECHAM5-r3_50km' = list(
+      institute = "SMHI",
+      rcm = "RCA",
+      gcm = "ECHAM5/MPI-OM",
+      gcm.run = 3,
+      emission.scenario = "A1B",
+      file.path.default = "/data/reloclim/rcm/ENSEMBLES_50km/SMHI",
+      file.name = list(
+        air_temperature = c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_tas.nc'
+          ),
+        precipitation_amount = c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_pr.nc'
+          ),
+        global_radiation = c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_rsds.nc'
+          ),
+        wind_speed = c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_wss.nc'
+          ),
+        relative_humidity= c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_hurs.nc'
+          ),
+        surface_upward_sensible_heat_flux= c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_hfss.nc'
+          ),
+        air_temperature_minimum= c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_tasmin.nc'
+          ),
+        air_temperature_maximum= c(
+          'SMHIRCA_A1B_ECHAM5_DM_50km_[0-9]{4}-[0-9]{4}_tasmax.nc'
+          ),
+        surface_temperature= c(
+          NA
+          )
+        ),
+      land.mask.name = "sftls",
+      land.mask = "/data/reloclim/rcm/ENSEMBLES_50km/SMHI/SMHIRCA_A1B_ECHAM5_FIX_50km_sftls.nc",
+      gridfile.path = "/data/reloclim/rcm/ENSEMBLES_50km/SMHI",
+      gridfile.filename = "SMHIRCA_A1B_ECHAM5_FIX_50km_orog.nc",
+      resolution = "50km"
+      ),
+
+
+
+
 
 ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ###+++++ DATASET: ENSEMBLES GCMs (those apart from the cmip3 ensmble)++++++++
@@ -21441,6 +21711,12 @@ gridfile.path = "/data/reloclim/rcm/ENSEMBLES/SMHI/RCA/HadCM3Q3_A1B/postproc/QM_
       ),
 ###########################################################################
 
+
+
+
+
+
+      
 ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ###+++++++++++++++++++++++DATASET: EUROCORDEX 0.11+++++++++++++++++++++++++++
 ###++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
