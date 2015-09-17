@@ -25,7 +25,7 @@ GetFileNames <- function(current.model.input,
   ##   parameter.name: Named character. Short parameter name for NetCDF
   ##                   meteorological parameter. Its name is the CF convention
   ##                   parameter name.
-  ##   period: Character. "reference.period" or "scenario.period" to extract
+  ##   period: Character. "reference.period" or "scenario.perio" to extract
   ##           information from current.model.input.
   ##   ...: Arguments being passed to ReadNetCdfTimeData (maybe different
   ##        calender or time units).
@@ -38,10 +38,18 @@ GetFileNames <- function(current.model.input,
   ##   2011-01-25 | original code (thm)
   ##   2013-10-08 | potential pitfall fixed if file.name and file.path
   ##                have a different list structure (thm)
+  ##   2015-06-17 | renamed modelinput directory entries from "reference.period" to "historical" and
+  ##                "scenario.period" to "scenario"  (thm)
   ##
   ## TODO(thm) give warning or errors if not enough files
   ##       and check for duplicate timeseries! and maybe sort them...
 
+    ## reference periods are marked as "historical" in modelinput file
+    if (period == "reference.period")
+        period <- "historical"
+    if (period == "scenario.period")
+        period <- "scenario"
+    
   ## extract parameter we are looking for
   parameter.long <- names(parameter.name)
 
@@ -56,7 +64,7 @@ GetFileNames <- function(current.model.input,
   }
 
 ### first extract the file.path for current parameter and current
-### period (scenario.period or reference.period) for given model
+### period ("scenario" or "historical") for given model
 
   ## set filepath to either file.path.alt or file.path.default (whatever has
   ## been definied in user.input)
@@ -109,7 +117,7 @@ GetFileNames <- function(current.model.input,
     }
   }
 ### now the filenames will be extracted for current parameter and current
-### period (scenario.period or reference.period) for given model
+### period ("scenario" or "historical") for given model
 
   ## we try to figure out whether file.names are stored hierarchically in a list
   ## as eg. [[parameter]][[period or [[period]][[parameter]] or [[period]] on

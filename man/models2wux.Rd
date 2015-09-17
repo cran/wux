@@ -401,7 +401,7 @@ models2wux(userinput, modelinput)
 	  enter a named vector of paths. If files are scattered by parameter,
 	  pass the parameter name (CF Metadata convention) as the vector
 	  name. If they are split by periods, then pass
-	  \code{reference.period} and  \code{scenario.period} as vector
+	  \code{historical} and  \code{scenario} as vector
 	  names. If files are seperated by both period and parameter, you
 	  can use nested named lists instead of vectors.
 	}
@@ -410,7 +410,7 @@ models2wux(userinput, modelinput)
 	  Character vector of file names of the NetCDF data
 	  files. If there are different file names for parameters (which
 	  will be mostly the case) and/or file names in scenario- and
-	  reference period are of different nature as well, use named
+	  historical period are of different nature as well, use named
 	  or nested lists as in the \code{file.path.alt} tag.
 	  You can set this tag \code{NA} if this climate model has no
 	  files. This makes sense for example for the GKSS model for global

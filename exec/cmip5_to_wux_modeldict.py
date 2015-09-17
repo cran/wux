@@ -113,24 +113,24 @@ def cmip5_modelinput_gen(rcp, CMIPPATH):
       emission.scenario = "${RCP}",
       file.path.alt = list(
         air_temperature =
-        list(reference.period = "${CMIPPATH}/${GCMDIR}/historical",
-             scenario.period =  "${CMIPPATH}/${GCMDIR}/${RCP}"),
+        list(historical = "${CMIPPATH}/${GCMDIR}/historical",
+             scenario =  "${CMIPPATH}/${GCMDIR}/${RCP}"),
         precipitation_amount =
-        list(reference.period = "${CMIPPATH}/${GCMDIR}/historical",
-             scenario.period =  "${CMIPPATH}/${GCMDIR}/${RCP}")),
+        list(historical = "${CMIPPATH}/${GCMDIR}/historical",
+             scenario =  "${CMIPPATH}/${GCMDIR}/${RCP}")),
       file.name = list(
         air_temperature = list(
-          reference.period = c(
+          historical = c(
             "${TASHIST}"
             ),
-          scenario.period = c(
+          scenario = c(
             "${TASSCEN}"
             )),
         precipitation_amount = list(
-          reference.period = c(
+          historical = c(
             "${PRHIST}"
             ),
-          scenario.period = c(
+          scenario = c(
             "${PRSCEN}"
            ))),
       gridfile.path = "${CMIPPATH}/${GCMDIR}/historical",

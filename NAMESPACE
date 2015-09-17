@@ -64,3 +64,15 @@ import(sp)
 ## corpcor, coda, mixstock
 ## some packages not necessary anymore in imports?:
 ## MASS, coda, mixstock
+
+## import trivial functions since 2.1-1
+importFrom("grDevices", "dev.new", "dev.off", "png", "postscript",
+           "rainbow")
+importFrom("graphics", "abline", "axis", "box", "boxplot", "bxp",
+           "grconvertX", "grconvertY", "grid", "hist", "layout",
+           "legend", "lines", "mtext", "par", "plot.new", "points",
+           "text", "title")
+importFrom("methods", "slot")
+importFrom("stats", "aov", "density", "formula", "median",
+           "model.matrix", "quantile", "sd")
+importFrom("utils", "object.size", "read.table", "tail", "write.table")
