@@ -53,7 +53,7 @@ importFrom("rworldmap", getMap)
 ## having no namspace...
 #import(ncdf)
 #importFrom(abind, abind)                #array bind
-import(ncdf)
+import(ncdf4)
 import(abind)
 import(fields)
 import(sp)

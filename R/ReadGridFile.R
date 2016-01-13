@@ -26,13 +26,15 @@ ReadGridFile <- function(grid.filename, mask.varname = NULL, lonlat.var.name = N
   ##
   ## History:
   ##   2010-10-29 | Original code (thm)
+  ##   2016-01-13 | change to "ncdf4" library
   ## 
   ## TODO(thm): write a function to detect the lon and lat variable name
   ##   (maybe it is x and y)
 
   ## initialize
   nc.lon <- nc.lat <- nc.mask <- NULL
-  nc.grid <- open.ncdf(grid.filename)
+  ## nc.grid <- open.ncdf(grid.filename)   old ncdf
+  nc.grid <- nc_open(grid.filename)
   ## read dimensions of netcdf file
   nc.dims <- GetNetcdfDims(nc.grid)
   ## lon.dims <- names(GetVariableDims(nc.grid, "lon"))
@@ -46,18 +48,22 @@ ReadGridFile <- function(grid.filename, mask.varname = NULL, lonlat.var.name = N
       tail(unlist(strsplit(grid.filename, .Platform$file.sep)), n=1)
     cat("      reading constant fields:", grid.filename.no.dir, "\n")
     if ( is.null(lonlat.var.name) ) {
-      nc.lon <-  get.var.ncdf(nc.grid, "lon")
-      nc.lat <-  get.var.ncdf(nc.grid, "lat")
+     ## nc.lon <-  get.var.ncdf(nc.grid, "lon")
+     ##  nc.lat <-  get.var.ncdf(nc.grid, "lat")
+        nc.lon <-  ncvar_get(nc.grid, "lon")
+        nc.lat <-  ncvar_get(nc.grid, "lat")
     } else {
-      nc.lon <-  get.var.ncdf(nc.grid, lonlat.var.name["longitude"])
-      nc.lat <-  get.var.ncdf(nc.grid, lonlat.var.name["latitude"])
+     ## nc.lon <-  get.var.ncdf(nc.grid, lonlat.var.name["longitude"])
+     ##  nc.lat <-  get.var.ncdf(nc.grid, lonlat.var.name["latitude"])
+        nc.lon <-  ncvar_get(nc.grid, lonlat.var.name["longitude"])
+        nc.lat <-  ncvar_get(nc.grid, lonlat.var.name["latitude"])
     }
   }
   ## if we read in a subregionfile
   if (!is.null(mask.varname))
-    nc.mask <-  get.var.ncdf(nc.grid, mask.varname)
+    nc.mask <-  ncvar_get(nc.grid, mask.varname)
  
-   close.ncdf(nc.grid)
+   nc_close(nc.grid)
 
   ## in case of a rectangular grid, generate lon-lat matrix
   lon.dim <- length(dim(nc.lon))

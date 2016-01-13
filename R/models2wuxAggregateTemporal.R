@@ -74,8 +74,8 @@ AggregateTemporal <- function(data.array,
   ## get both date vectors from NetCDF file and the theoretical vector defined by user
   if (temporal.resolution == "daily"){
     ## get dates of NetCDF file (same dim as dim of array) - either daily or monthly
-    date.as.is <- GetDayMonthYearFactor(nc.time.list, start.date, end.date, ...)
-    date.as.is <- paste(date.as.is[,1], date.as.is[,2], date.as.is[,3], sep = "-" )
+    date.as.is.fac <- GetDayMonthYearFactor(nc.time.list, start.date, end.date, ...)
+    date.as.is <- paste(date.as.is.fac[,1], date.as.is.fac[,2], date.as.is.fac[,3], sep = "-" )
     ## get dates that SHOULD be used according to start.date and end.date declared in userinput
     ## by the user himself.
     dates <- seq.date.daily(start.date, end.date, calendar)
@@ -98,11 +98,20 @@ AggregateTemporal <- function(data.array,
   ## check if the date in NetCDF files was read out correctly, i.e. if
   ## there are any timeslices read in more than once
   if (length(unique(date.as.is)) != length(date.as.is))
-    stop("THERE ARE DUPLICATE DATES IN YOUR NETCDF FILE. CHECK YOUR InitModelsDictionary AND DELETE DUPLICATE FILES.")
+    stop("THERE ARE DUPLICATE DATES IN YOUR NETCDF FILE. CHECK YOUR InitModelsDictionary AND DELETE DUPLICATE FILES. (or maybe you defined a wrong temporal resolution in your init.models dictionary config).")
   
-  ## check if there are missing time slices (i.e. missing files) in the NetCDF file
+  ## check if there are missing time slices (i.e. missing files) in
+  ## the NetCDF file. 
   are.timesteps.missing <- !dates.as.should.be %in% date.as.is
-
+  ## (HACK) in case of a 360 days calendar we do not perform this check
+  ## on daily bases, merely on a monthly basis
+  if (calendar == 360){
+      dates.as.should.be.mon <- paste(year.as.should, month.as.should, sep = "-")
+      date.as.is.mon <- paste(date.as.is.fac[,1], date.as.is.fac[,2], sep = "-" )
+      are.timesteps.missing <- !dates.as.should.be.mon %in% date.as.is.mon
+ }
+      
+ 
   ## change dimension of data.array in case of missing values and fill with NAs
   if ( any(are.timesteps.missing) ){
     cat("WARNING: THERE ARE ", sum(are.timesteps.missing) ,

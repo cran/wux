@@ -4,7 +4,8 @@ GetLandMask <- function( land.mask,
                          clip.land.mask.info ) {
 
   ## read land mask
-  nc <- open.ncdf(land.mask, readunlim=TRUE)
+  ## nc <- open.ncdf(land.mask, readunlim=TRUE)
+  nc <- nc_open(land.mask, readunlim=TRUE)
   parameter.dims <- GetVariableDims(nc, land.mask.name)
   if ( length( parameter.dims) == 2 ) {
     nc.start <- c("lon"=0,"lat"=0)
@@ -17,11 +18,16 @@ GetLandMask <- function( land.mask,
   nc.count[c("lon", "lat")] <- clip.land.mask.info$count
   nc.start[c("lon", "lat")] <- clip.land.mask.info$offset
 
+  ## land.mask.values <-                                   ##old...ncdf
+  ##   get.var.ncdf(nc, land.mask.name,
+  ##                start=nc.start,
+  ##                count=nc.count, verbose = FALSE)
   land.mask.values <-
-    get.var.ncdf(nc, land.mask.name,
+    ncvar_get(nc, land.mask.name,
                  start=nc.start,
                  count=nc.count, verbose = FALSE)
-  close.ncdf(nc)
+  ## close.ncdf(nc)
+  nc_close(nc)
 
   ## compare lon lat of data and land mask and rotate land mask if necessary
   lon.comp <- all.equal(round(clip.data.info$lon, digits=2),

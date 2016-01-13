@@ -1,8 +1,8 @@
 
 # ----------------------------------------------------------------
-# $Author: geh $
-# $Date: 2012-12-06 13:40:57 +0100 (Thu, 06 Dec 2012) $
-# $Rev: 243 $
+# $Author: thm $
+# $Date: 2016-01-13 15:46:23 +0100 (Wed, 13 Jan 2016) $
+# $Rev: 344 $
 # ----------------------------------------------------------------
 
 ##########################################################################
@@ -122,6 +122,17 @@ GetParameterDefaultShortName <- function(longname) {
   ## get shortname for surface temperature
     is.parameter <- (longname == "surface_temperature")
   shortname[is.parameter] <- "ts"
+
+  ## some indices...
+
+  ## positive_degree_days
+  is.parameter <- (longname == "positive_degree_days")
+  shortname[is.parameter] <- "pdd"
+
+  ## snow_accumulation
+  is.parameter <- (longname == "snow_accumulation")
+  shortname[is.parameter] <- "snow_acc"
+
 
   ## if there is at least one "NA"-shortname left (i.e. no longame match for
   ## at least one parameter

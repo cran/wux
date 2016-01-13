@@ -1,7 +1,7 @@
 Package: wux
 Type: Package
 Title: Wegener Center Climate Uncertainty Explorer
-Version: 2.1-1
+Version: 2.2-0
 Date: 2015-09-17
 Authors@R: c(person("Thomas", "Mendlik", role = c("aut", "cre"),
 	             email = "thomas.mendlik@uni-graz.at"),
@@ -13,7 +13,7 @@ Authors@R: c(person("Thomas", "Mendlik", role = c("aut", "cre"),
                     email = "andreas.gobiet@zamg.ac.at"))
 Author: Thomas Mendlik [aut, cre], Georg Heinrich [aut], Armin Leuprecht [aut], Andreas Gobiet [ths]
 Maintainer: Thomas Mendlik <thomas.mendlik@uni-graz.at>
-Depends: R (>= 2.10), sp, ncdf, reshape, abind, fields
+Depends: R (>= 2.10), sp, ncdf4, reshape, abind, fields
 Imports: rgdal, rgeos, class, stringr, Hmisc, gdata, corpcor,
         rworldmap, methods
 Suggests: lattice
@@ -21,7 +21,7 @@ Description: Methods to calculate and interpret climate change signals and time 
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-Packaged: 2015-09-17 09:26:46 UTC; thm
+Packaged: 2016-01-13 16:36:27 UTC; thm
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2015-09-17 14:49:37
+Date/Publication: 2016-01-13 18:15:30

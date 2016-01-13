@@ -42,6 +42,7 @@ ReadNetCdf <- function(filenames, parameter.name,
   ##   2011-06-01 | reads in data with dim = 2 as well (thm)
   ##   2011-12-01 | some small renaming (thm)
   ##   2014-09-29 | _FillValue attribute is also affected by scaling and offset... (thm)
+  ##   2016-01-13 | change to "ncdf4" library
 
   ## get parameter longname (CF-convention)
   par.longname <- names(parameter.name)
@@ -53,7 +54,8 @@ ReadNetCdf <- function(filenames, parameter.name,
     cat("\n      opening file \"", file.name, "\"\n", sep="")
 
     ## open nc...
-    nc <- open.ncdf(infile, readunlim=TRUE)
+    ## nc <- open.ncdf(infile, readunlim=TRUE)
+    nc <- nc_open(infile, readunlim=TRUE)
 
     ## Does our specified variable exist?
     if ( !is.list(parameter.name) ) {
@@ -112,7 +114,10 @@ ReadNetCdf <- function(filenames, parameter.name,
 
     cat("      reading parameter data \"", parameter.name, "\" from ",
         time.start, " to ", time.end, "\n", sep = "")
-    nc.values <- get.var.ncdf(nc, parameter.name,
+    ## old ncdf package...
+    ## nc.values <- get.var.ncdf(nc, parameter.name,
+    ##                           start=nc.start, count=nc.count, verbose = FALSE)
+    nc.values <- ncvar_get(nc, parameter.name,
                               start=nc.start, count=nc.count, verbose = FALSE)
 
     ## force nc.values to be a 3-dimensional array (as nc.count)
@@ -130,21 +135,24 @@ ReadNetCdf <- function(filenames, parameter.name,
     ## dim(nc2) <- c(nc.count[c("lon","lat")][expand.dim], dim(nc2))
 
     ## set missing values to NA
-    missing.list <- att.get.ncdf(nc, parameter.name, "_FillValue")
+    ## missing.list <- att.get.ncdf(nc, parameter.name, "_FillValue")
+    missing.list <- ncatt_get(nc, parameter.name, "_FillValue")
     if (missing.list$hasatt) {
       missing.value <- missing.list$value * scale.factor + add.offset
       nc.values[nc.values == missing.value] <- NA
     }
 
     ## check out units
-    units <- att.get.ncdf(nc, parameter.name, "units")
+    ## units <- att.get.ncdf(nc, parameter.name, "units")
+    units <- ncatt_get(nc, parameter.name, "units")
     if (units$hasatt){
       units.value <- units$value
     } else {
       stop("PARAMETER UNITS NOT DECLARED! PASS THEM THROUGH USER.INPUT SOMEHOW")
     }
 
-    close.ncdf(nc)
+    ## close.ncdf(nc)
+    nc_close(nc)
 
     ## retreiving dimension of output array
     nc.array.dim <- attr(nc.values, "dim")
@@ -243,7 +251,7 @@ GetNetcdfDims <- function(nc) {
   ##   2010-10-29 | Original code (thm)
   
   ## if nc of 'netcdf' package
-  if (class(nc) == 'ncdf') {
+  if (class(nc) %in% c('ncdf', 'ncdf4')) {
     nc.dims <- rep(0, times=nc$ndims)
     ## give nc.dims the netCDF dimension names and dimension lengths
     for (ii in seq(along = nc$dim)) {
@@ -285,7 +293,7 @@ GetVariableDims <- function(nc, parameter) {
   ##   2010-10-29 | Original code (thm)
 
   ## if nc of 'netcdf' package
-  if (class(nc) == 'ncdf') {
+  if (class(nc) %in% c('ncdf', 'ncdf4')) {
     parameter.var <- nc$var[[parameter]]
     if (is.null(parameter.var))
       stop("SHORTNAME OF PARAMETER IN FILE NOT KNOWN")
@@ -361,7 +369,7 @@ GetAddOffset <- function(nc, parameter) {
   ##   2010-10-29 | Original code (thm)
 
   ## if nc of 'netcdf' package
-  if (class(nc) == 'ncdf') {
+  if (class(nc) %in% c('ncdf', 'ncdf4')) {
     ## data packed?
     has.add.offset <- nc$var[[parameter]]$hasAddOffset
     if (is.null(has.add.offset)) {
@@ -391,7 +399,7 @@ GetScaleFactor <- function(nc, parameter) {
   ##   2010-10-29 | Original code (thm)
 
   ## if nc of 'netcdf' package
-  if (class(nc) == 'ncdf') {
+  if (class(nc) %in% c('ncdf', 'ncdf4')) {
     ## data packed?
     has.scale.factor <- nc$var[[parameter]]$hasScaleFact
     if (is.null(has.scale.factor)) {

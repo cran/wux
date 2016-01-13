@@ -56,6 +56,7 @@ ReadNetCdfTimeData <- function(filenames,
   ##   2010-11-25 | Keywords "calendar" and "time.units" added (thm)
   ##   2010-11-29 | Keyword "count.first.time.value" added (thm)
   ##   2012-03-14 | time in "minutes from...." added (seb)
+  ##   2016-01-13 | change to "ncdf4" library
 
   cat("    reading time variable from NetCDF \n")
   ## generate empty time-series
@@ -80,19 +81,24 @@ ReadNetCdfTimeData <- function(filenames,
 
 ### Reading data
     ## Start NetCDF reading
-    nc <- open.ncdf(filenames[file.index])
-    ## read dimensions of netcdf file
+    ## nc <- open.ncdf(filenames[file.index]) old...
+    nc <- nc_open(filenames[file.index])
+     ## read dimensions of netcdf file
     ##nc.dims <- GetNetcdfDims(nc)
     ## read time unit-attribute in file
-    units.attr <- att.get.ncdf(nc, "time", "units")
+    ## units.attr <- att.get.ncdf(nc, "time", "units")
+    units.attr <- ncatt_get(nc, "time", "units")
     ## read time steps
     ## TODO(thm): nicht hartcodiert sondern dynamisch nach vals suchen!!!
-    timesteps <- get.var.ncdf(nc, "time")
+    ## timesteps <- get.var.ncdf(nc, "time")
+    timesteps <- ncvar_get(nc, "time")
     ## flag if numbers of days in year is 360 or regular calendar
-    calendar.attr      <- att.get.ncdf(nc, "time", "calendar")
+    ## calendar.attr      <- att.get.ncdf(nc, "time", "calendar")
+    calendar.attr      <- ncatt_get(nc, "time", "calendar")
     have.calendar.attr <- calendar.attr$hasatt
     ## Close NetCDF file
-    close.ncdf(nc)
+    ## close.ncdf(nc)
+    nc_close(nc)
 
 ### Getting data attributes
     ## getting time units
