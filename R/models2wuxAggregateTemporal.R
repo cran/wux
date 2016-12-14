@@ -70,7 +70,7 @@ AggregateTemporal <- function(data.array,
     calendar <- "365"
   else
     stop("UNKNOWN CALENDAR TYPE IN NETCDF FILE: ", cal.in.netcdf)
-  
+
   ## get both date vectors from NetCDF file and the theoretical vector defined by user
   if (temporal.resolution == "daily"){
     ## get dates of NetCDF file (same dim as dim of array) - either daily or monthly
@@ -85,8 +85,8 @@ AggregateTemporal <- function(data.array,
     dates.as.should.be <- paste(year.as.should, month.as.should, day.as.should, sep = "-")
   } else if (temporal.resolution == "monthly") {
     ## get dates of NetCDF file (same dim as dim of array) - either daily or monthly
-    date.as.is <- GetMonthYearFactor(nc.time.list, start.date, end.date, ...)
-    date.as.is <- paste(date.as.is[,1], date.as.is[,2], sep = "-" )
+    date.as.is.fac <- GetMonthYearFactor(nc.time.list, start.date, end.date, ...)
+    date.as.is <- paste(date.as.is.fac[,1], date.as.is.fac[,2], sep = "-" )
     ## get dates that SHOULD be used according to start.date and end.date declared in userinput
     ## by the user himself. Calendar is not relevant anymore.
     dates <- seq(start.date, end.date, by = "month")

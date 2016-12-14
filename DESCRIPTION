@@ -1,8 +1,8 @@
 Package: wux
 Type: Package
 Title: Wegener Center Climate Uncertainty Explorer
-Version: 2.2-0
-Date: 2015-09-17
+Version: 2.2-1
+Date: 2016-12-14
 Authors@R: c(person("Thomas", "Mendlik", role = c("aut", "cre"),
 	             email = "thomas.mendlik@uni-graz.at"),
              person("Georg", "Heinrich", role = c("aut"),
@@ -21,7 +21,7 @@ Description: Methods to calculate and interpret climate change signals and time 
 License: GPL (>= 2)
 LazyLoad: yes
 LazyData: yes
-Packaged: 2016-01-13 16:36:27 UTC; thm
+Packaged: 2016-12-14 14:21:14 UTC; thm
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2016-01-13 18:15:30
+Date/Publication: 2016-12-14 17:23:42
